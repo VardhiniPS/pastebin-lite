@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const sequelize = getSequelize();
 
 const Paste = sequelize.define('Paste', {
   id: {

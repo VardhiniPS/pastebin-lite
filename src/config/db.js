@@ -1,14 +1,21 @@
 const{ Sequelize } = require ('sequelize');
 require('dotenv').config();
+let sequelize = null;
 
-const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASS,{
+function getSequelize() {
+  if (!sequelize) {
+    sequelize = new Sequelize(
+      process.env.DB_NAME,
+      process.env.DB_USER,
+      process.env.DB_PASS,
+      {
         host: process.env.DB_HOST,
-        dialect :'mysql',
-        logging :(...msg) => {},
-    }
-);
+        dialect: 'mysql',
+        logging: false,
+      }
+    );
+  }
+  return sequelize;
+}
 
-module.exports=sequelize;
+module.exports = getSequelize;
